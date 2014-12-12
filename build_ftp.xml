@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE buildfile>
+<project name="CI_Application" default="deploy" basedir=".">
+	<target name="deploy" description="FTPing to server">
+		<scp todir="${username}:${password}@${server}:${remote}"
+		     trust="true"
+		     sftp="true"
+		     port="${port}"
+		>
+    		<fileset dir="application">
+    			<modified>
+    				<param name="cache.cachefile" value="localdev.cache"/>
+    		    </modified>
+    		</fileset>
+  		</scp>
+		<scp todir="${username}:${password}@${server}:${assets_remote}"
+		     trust="true"
+		     sftp="true"
+		     port="${port}"
+		>
+			<fileset dir="assets">
+    			<modified>
+    				<param name="cache.cachefile" value="localdev.cache"/>
+    		    </modified>
+			</fileset>
+		</scp>
+	</target>
+</project>
